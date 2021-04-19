@@ -49,18 +49,9 @@
                             </form>
                             <ul>
                                 <li class="book_title">${bookInfo.title}</li>
-                            </ul>
-                             <ul>
-                                <li class="book_title">${bookInfo.author}</li>
-                            </ul>
-                             <ul>
-                                <li class="book_title">${bookInfo.publisher}</li>
-                            </ul>
-                             <ul>
-                                <li class="book_title">${bookInfo.publishDate}</li>
-                            </ul>
-                             <ul>
-                                <li class="book_title">${bookInfo.thumbnail}</li>
+                                <li class="book_author">${bookInfo.author}</li>
+                                <li class="book_publisher">${bookInfo.publisher}</li>
+                                <li class="book_publish_date">${bookInfo.publishDate}</li>
                             </ul>
                         </div>
                     </c:forEach>
