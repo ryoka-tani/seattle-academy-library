@@ -50,6 +50,18 @@
                             <ul>
                                 <li class="book_title">${bookInfo.title}</li>
                             </ul>
+                             <ul>
+                                <li class="book_title">${bookInfo.author}</li>
+                            </ul>
+                             <ul>
+                                <li class="book_title">${bookInfo.publisher}</li>
+                            </ul>
+                             <ul>
+                                <li class="book_title">${bookInfo.publishDate}</li>
+                            </ul>
+                             <ul>
+                                <li class="book_title">${bookInfo.thumbnail}</li>
+                            </ul>
                         </div>
                     </c:forEach>
                 </div>
