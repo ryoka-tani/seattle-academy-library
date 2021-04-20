@@ -3,6 +3,7 @@ package jp.co.seattle.library.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -44,11 +45,15 @@ public class UsersService {
      */
     public UserInfo selectUserInfo(String email, String password) {
         // TODO SQL生成
-        String sql = "";
+        String sql = "SELECT id,email,password FROM users WHERE email = '" + email + "' AND password = '" + password
+                + "'";
 
-        UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
-        return selectedUserInfo;
-
+        try {
+            UserInfo selectedUserInfo = jdbcTemplate.queryForObject(sql, new UserCountRowMapper());
+            return selectedUserInfo;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
     }
 
 }
