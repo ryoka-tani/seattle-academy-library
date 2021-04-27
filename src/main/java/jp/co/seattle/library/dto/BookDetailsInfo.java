@@ -46,9 +46,7 @@ public class BookDetailsInfo {
         this.publishDate = publishDate;
         this.description = description;
         this.isbn = isbn;
-    }
 
-    public void setDescripyion(String descripyion) {
         // TODO 自動生成されたメソッド・スタブ
 
     }

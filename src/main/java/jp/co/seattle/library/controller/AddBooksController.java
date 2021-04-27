@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mysql.jdbc.StringUtils;
+
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.ThumbnailService;
@@ -56,7 +58,7 @@ public class AddBooksController {
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
-            @RequestParam("publish_date") String publish_date,
+            @RequestParam("publish_date") String publishDate,
             @RequestParam("thumbnail") MultipartFile file,
             @RequestParam("description") String description,
             @RequestParam("isbn") String isbn,
@@ -68,7 +70,7 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
-        bookInfo.setPublishDate(publish_date);
+        bookInfo.setPublishDate(publishDate);
         bookInfo.setDescription(description);
         bookInfo.setIsbn(isbn);
 
@@ -93,7 +95,12 @@ public class AddBooksController {
                 return "addBook";
             }
         }
-
+        if (StringUtils.isNullOrEmpty(title) || StringUtils.isNullOrEmpty(author)
+                || StringUtils.isNullOrEmpty(publisher)
+                || StringUtils.isNullOrEmpty(publishDate)) {
+            model.addAttribute("error", "必須項目を入力してください");
+            return "addBook";
+        }
         // TODO 登録した書籍の詳細情報を表示するように実装
         //出版日、半角数字のYYYYMMDDでなければエラーを出す
         //ISBN文字数13まで、半角数字じゃないとエラーを出す
@@ -101,7 +108,7 @@ public class AddBooksController {
         try {
             DateFormat df = new SimpleDateFormat("yyyyMMdd");
             df.setLenient(false);
-            df.format(df.parse(publish_date));
+            df.format(df.parse(publishDate));
         } catch (ParseException p) {
             model.addAttribute("error", "ISBNの桁数または半角数字が正しくありません<br>出版日は半角数字のYYYYMMDD形式で入力してください");
             return "addBook";
