@@ -63,9 +63,6 @@
 							<input type="text" name="author" autocomplete="off">
 						</c:if>
 					</div>
-                        <c:if test="${!empty errorMessage}">
-                             <div class="error">${errorMessage}</div>
-                        </c:if>
 					<div>
 						<span>出版社</span><span class="care care2">必須</span>
 						<c:if test="${!empty bookInfo}">
