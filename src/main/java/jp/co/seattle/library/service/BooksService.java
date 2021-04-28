@@ -56,8 +56,6 @@ public class BooksService {
         return bookDetailsInfo;
     }
 
-
-
     /**
      * 書籍を登録する
      *
@@ -81,7 +79,47 @@ public class BooksService {
     public void deletingSystem(int bookId) {
         String sql = "DELETE FROM books WHERE id =" + bookId + ";";
         jdbcTemplate.update(sql);
-
     }
 
+
+    public void editBook (BookDetailsInfo bookInfo) {
+        String sql = "UPDATE books set title ='" + bookInfo.getTitle()
+            + "',author ='" + bookInfo.getAuthor() 
+            + "',publisher ='" + bookInfo.getPublisher() 
+            + "',thumbnail_name='" + bookInfo.getThumbnailName() 
+            + "',thumbnail_url='" + bookInfo.getThumbnailUrl()
+                + "',publish_date='" + bookInfo.getPublishDate()
+                + "',description='" + bookInfo.getDescription()
+                + "',isbn='" + bookInfo.getIsbn()
+                + "',upd_date =" + "sysdate()"
+                + "where id =" + bookInfo.getBookId() + ";";
+        
+    jdbcTemplate.update(sql);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

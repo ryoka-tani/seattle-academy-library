@@ -81,7 +81,7 @@
                     <form method="post" action="returnBook">
                     <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook" >返す</button>
                 </form>
-                    <form method="post" action="editBook">
+                    <form method="post" action="editBook"><!-- ①editbookcontroller.javaに遷移 -->
                     <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook" >編集</button>
                 </form>
                     <form method="post" action="deleteBook">

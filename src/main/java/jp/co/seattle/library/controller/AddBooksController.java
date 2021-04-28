@@ -63,6 +63,7 @@ public class AddBooksController {
             @RequestParam("description") String description,
             @RequestParam("isbn") String isbn,
             Model model) {
+        //LOGGERで記録する
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
         // パラメータで受け取った書籍情報をDtoに格納する。
