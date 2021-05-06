@@ -26,20 +26,27 @@ import jp.co.seattle.library.service.ThumbnailService;
  * Handles requests for the application home page.
  */
 
-@Controller //APIの入り口
-public class AddBooksController {
-    final static Logger logger = LoggerFactory.getLogger(AddBooksController.class);
+@Controller //APIの入り口//この中からJSPが探す
+public class EditBookController {
+    final static Logger logger = LoggerFactory.getLogger(EditBookController.class);
 
+    // @Autowired 自動でインスタンス生成
     @Autowired
     private BooksService booksService;
 
     @Autowired
     private ThumbnailService thumbnailService;
 
-    @RequestMapping(value = "/addBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
-    //RequestParamでname属性を取得
-    public String login(Model model) {
-        return "addBook";
+    //②details.jspから飛んできたところ　//③details.jsp84行目がpostの為変更
+    //@RequestMapping　jspとjavaのつなぐ
+    @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
+    //④RequestParamでjspの変数を受け取る //integer でjspのbookid変数をjavaで使えるように
+    public String login(Locale locale,
+            @RequestParam("bookId") int bookId,
+            Model model) {
+        //webに反映
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        return "EditBook";
     }
 
     /**
@@ -53,8 +60,9 @@ public class AddBooksController {
      * @return 遷移先画面
      */
     @Transactional
-    @RequestMapping(value = "/insertBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
     public String insertBook(Locale locale,
+            @RequestParam("bookId") int bookId, //既存の情報の呼び出し
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
@@ -63,11 +71,11 @@ public class AddBooksController {
             @RequestParam("description") String description,
             @RequestParam("isbn") String isbn,
             Model model) {
-        //LOGGERで記録する
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
         // パラメータで受け取った書籍情報をDtoに格納する。
         BookDetailsInfo bookInfo = new BookDetailsInfo();
+        bookInfo.setBookId(bookId);
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
@@ -93,18 +101,15 @@ public class AddBooksController {
                 // 異常終了時の処理
                 logger.error("サムネイルアップロードでエラー発生", e);
                 model.addAttribute("bookDetailsInfo", bookInfo);
-                return "addBook";
+                return "EditBook";
             }
         }
         if (StringUtils.isNullOrEmpty(title) || StringUtils.isNullOrEmpty(author)
                 || StringUtils.isNullOrEmpty(publisher)
                 || StringUtils.isNullOrEmpty(publishDate)) {
             model.addAttribute("error", "必須項目を入力してください");
-            return "addBook";
+            return "EditBook";
         }
-        // TODO 登録した書籍の詳細情報を表示するように実装
-        //出版日、半角数字のYYYYMMDDでなければエラーを出す
-        //ISBN文字数13まで、半角数字じゃないとエラーを出す
 
         try {
             DateFormat df = new SimpleDateFormat("yyyyMMdd");
@@ -112,19 +117,19 @@ public class AddBooksController {
             df.format(df.parse(publishDate));
         } catch (ParseException p) {
             model.addAttribute("error", "ISBNの桁数または半角数字が正しくありません<br>出版日は半角数字のYYYYMMDD形式で入力してください");
-            return "addBook";
+            return "EditBook";
         }
         boolean isValidIsbn = isbn.matches("[0-9]{10}||[0-9]{13}?");
         if (!isValidIsbn) {
             model.addAttribute("error", "ISBNの桁数または半角数字が正しくありません<br>出版日は半角数字のYYYYMMDD形式で入力してください");
-            return "addBook";
+            return "EditBook";
         }
 
-        // 書籍情報を新規登録する
-        booksService.registBook(bookInfo);
-        model.addAttribute("resultMessage", "登録完了");
-        model.addAttribute("bookDetailsInfo", bookInfo);
+
+        booksService.editBook(bookInfo);
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
         //  詳細画面に遷移する
         return "details";
     }
 }
+
