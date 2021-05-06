@@ -127,7 +127,6 @@ public class EditBookController {
 
 
         booksService.editBook(bookInfo);
-        model.addAttribute("resultMessage", "編集完了");
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
         //  詳細画面に遷移する
         return "details";
