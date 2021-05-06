@@ -81,7 +81,11 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
-
+    /**
+     * 書籍を編集する
+     *
+     * @param bookInfo 書籍情報
+     */
     public void editBook (BookDetailsInfo bookInfo) {
         String sql = "UPDATE books set title ='" + bookInfo.getTitle()
             + "',author ='" + bookInfo.getAuthor() 
@@ -97,29 +101,3 @@ public class BooksService {
     jdbcTemplate.update(sql);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
