@@ -38,11 +38,21 @@ public class BulkBooksController {
     @Autowired
     BooksService booksService;
 
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/bulkBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
     public String login(Model model) {
         return "bulkBook";
     }
 
+    /**
+     * @param locale 
+     * @param uploadFile アップロードされたcsvファイル
+     * @param model
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/bulkBooks", method = RequestMethod.POST)
     public String fileContents(Locale locale,
