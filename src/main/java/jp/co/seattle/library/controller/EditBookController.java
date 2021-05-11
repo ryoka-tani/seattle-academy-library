@@ -37,10 +37,14 @@ public class EditBookController {
     @Autowired
     private ThumbnailService thumbnailService;
 
-    //②details.jspから飛んできたところ　//③details.jsp84行目がpostの為変更
-    //@RequestMapping　jspとjavaのつなぐ
+    /**
+     * 書籍情報を取得する
+     * @param locale ロケール情報
+     * @param bookId 書籍のID
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/editBook", method = RequestMethod.POST) //value＝actionで指定したパラメータ
-    //④RequestParamでjspの変数を受け取る //integer でjspのbookid変数をjavaで使えるように
     public String login(Locale locale,
             @RequestParam("bookId") int bookId,
             Model model) {
