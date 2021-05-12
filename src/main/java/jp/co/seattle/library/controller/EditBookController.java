@@ -128,12 +128,10 @@ public class EditBookController {
             model.addAttribute("error", "ISBNの桁数または半角数字が正しくありません<br>出版日は半角数字のYYYYMMDD形式で入力してください");
             return "EditBook";
         }
-
-
         booksService.editBook(bookInfo);
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        model.addAttribute("lendingStatus", "貸出可");
         //  詳細画面に遷移する
         return "details";
     }
 }
-
