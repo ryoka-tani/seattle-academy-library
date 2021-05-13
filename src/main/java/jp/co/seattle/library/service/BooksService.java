@@ -39,6 +39,7 @@ public class BooksService {
 
         return getedBookList;
     }
+
     /**
      * 書籍IDに紐づく書籍詳細情報を取得する
      *
@@ -76,6 +77,16 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
+    /**
+     * 最大値のIDを取得する
+     * @return getBookId
+     */
+    public int getBookId() {
+        String sql = "SELECT MAX(ID)FROM books";
+        int getBookId = jdbcTemplate.queryForObject(sql, Integer.class);
+        return getBookId;
+    }
+
     /**bookIDに紐付いたデータを書籍テーブル上から削除
      * @param bookId 
      */
@@ -89,18 +100,19 @@ public class BooksService {
      *
      * @param bookInfo 書籍情報
      */
-    public void editBook (BookDetailsInfo bookInfo) {
+    public void editBook(BookDetailsInfo bookInfo) {
         String sql = "UPDATE books set title ='" + bookInfo.getTitle()
-            + "',author ='" + bookInfo.getAuthor() 
-            + "',publisher ='" + bookInfo.getPublisher() 
-            + "',thumbnail_name='" + bookInfo.getThumbnailName() 
-            + "',thumbnail_url='" + bookInfo.getThumbnailUrl()
+                + "',author ='" + bookInfo.getAuthor()
+                + "',publisher ='" + bookInfo.getPublisher()
+                + "',thumbnail_name='" + bookInfo.getThumbnailName()
+                + "',thumbnail_url='" + bookInfo.getThumbnailUrl()
                 + "',publish_date='" + bookInfo.getPublishDate()
                 + "',description='" + bookInfo.getDescription()
                 + "',isbn='" + bookInfo.getIsbn()
                 + "',upd_date =" + "sysdate()"
                 + "where id =" + bookInfo.getBookId() + ";";
-        
-    jdbcTemplate.update(sql);
+
+        jdbcTemplate.update(sql);
     }
+
 }

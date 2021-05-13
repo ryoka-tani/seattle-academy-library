@@ -49,8 +49,8 @@ public class DetailsController {
         //ifで貸出状況に応じて処理を変える
         //データがある場合（貸出中の場合、１）
         if (number == 1) {
-            //借りるボタンは非活性
-            //返すボタンは活性
+            //借りるボタンは非活性 
+            //返すボタンは活性           
             //削除ボタンは非活性
             //貸出ステータスは貸出し中
             model.addAttribute("lendingStatus", "貸出中");

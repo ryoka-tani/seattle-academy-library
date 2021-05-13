@@ -25,6 +25,13 @@ public class LendingController {
     @Autowired
     private BooksService booksService;
 
+    /**
+     * 貸出を登録する
+     * @param locale
+     * @param bookId
+     * @param model
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/rentBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String borrowingBook(Locale locale,
