@@ -41,7 +41,6 @@ public class EditBookController {
     @Autowired
     private RentService rentService;
 
-
     /**
      * 書籍情報を取得する
      * @param locale ロケール情報
@@ -136,16 +135,8 @@ public class EditBookController {
 
         int number = rentService.rentCount(bookId);
         if (number == 1) {
-            //借りるボタンは非活性     
-            //返すボタンは活性           
-            //削除ボタンは非活性
-            //貸出ステータスは貸出し中
             model.addAttribute("lendingStatus", "貸出中");
-        } else {//データがない場合（貸出可能の場合、０）
-            //借りるボタンは活性
-            //返すボタンは非活性
-            //削除ボタンは活性
-            //貸出ステータスはなし
+        } else {
             model.addAttribute("lendingStatus", "貸出可");
         }
         booksService.editBook(bookInfo);
