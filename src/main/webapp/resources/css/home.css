@@ -100,8 +100,10 @@ input {
 .books {
     display: inline-block;
     margin-right: 10px;
-    line-height: 1.5;
+    line-height: 1.5; 
+    width: 15%;
 }
+
 .book_thumnail {
     position: relative;
     width: 200px;
