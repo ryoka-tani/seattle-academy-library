@@ -45,6 +45,7 @@ input {
 .body form {
     border: none;
     display: inline-block;
+    background-color:#EAD9FF;
 }
 
 .care {
@@ -75,7 +76,7 @@ input {
     font-size: 15px;
     width: 325px;
     padding: 4px 10px;
-    border: 1px solid #2196f3;
+    border: 1px solid #F08080;
 }
 
 .search1:hover {
@@ -101,7 +102,6 @@ input {
     display: inline-block;
     margin-right: 10px;
     line-height: 1.5; 
-    width: 15%;
 }
 
 .book_thumnail {
@@ -150,14 +150,14 @@ a.btn_add_book,a.btn_bulk_book, button.btn_addBook,button.btn_editBook, button.b
     text-align: center;
     padding: 8px 12px;
     margin: 10px 5px 0;
-    background-color: #7db4e6;
+    background-color: #FF4F50;
     border-bottom: solid 2px rgba(0, 0, 0, .2);
     box-shadow: inset 0 2px 0 rgba(255, 255, 255, .2), 0 2px 2px
         rgba(0, 0, 0, .2);
     color: #fff;
 }
 a.btn_bulk_book{
-	background-color: #66cdaa;
+	background-color: #FF6347;
 }
 button.btn_editBook{
     background-color: #9ec34b;
