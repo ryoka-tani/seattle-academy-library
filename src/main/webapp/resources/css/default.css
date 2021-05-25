@@ -240,8 +240,17 @@ main > .operation > .keyword {
     color:#ed9017;
 }
 /* メインコンテンツ */
+html {
+   background-color: #F08080; /* 周囲の背景色 */
+}
+body {
+   margin: 30px;   /* 外側の余白を30pxに */
+   padding: 0px;   /* 内側の余白を消す */
+   background-color: #FFE4E1; /* 本文部分の背景色 */
+}
 main {
-    margin: 20px;
+	background-color: #FFE4E1;
+    margin: 20px; 
     /* min-height: 1024px; */
 }
 /* コンテンツ本体 */
@@ -269,8 +278,8 @@ ul {
 
 h1 {
   padding: 0.4em 0.5em;
-  color: #707070;
-  border-left: solid 5px #7db4e6;
+  color: #707070; 
+  border-left: solid 5px #F08080;
 }
 .error_msg {
     color: red;
